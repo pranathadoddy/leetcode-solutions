@@ -25,7 +25,7 @@ Output: [["a"]]
  */
 
 /*Brute Force*/
-var groupAnagrams = function (strs) {
+/* var groupAnagrams = function (strs) {
 
     const groupedAnagrams = [];
 
@@ -51,5 +51,28 @@ var groupAnagrams = function (strs) {
 
     return groupedAnagrams;
 };
+ */
+
+var groupAnagrams = function (strs) {
+
+    const mappedAnagram = new Map();
+    
+
+    for(let str of strs){
+        const sortedStr = str.split('').sort().join('');
+        const key = mappedAnagram.get(sortedStr);
+        if(key){
+            key.push(str);
+            mappedAnagram.set(sortedStr, key);
+            continue;
+        }
+
+        mappedAnagram.set(sortedStr, [str]);
+    }
+
+    return Array.from(mappedAnagram.values());
+}
+
+
 
 console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
